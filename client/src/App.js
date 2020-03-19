@@ -1,13 +1,28 @@
 import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
+// PAGES
 import SearchPage from "./pages/Search"
-import './App.css';
+import NoMatch from "./pages/NoMatch"
 
 function App() {
   return (
-    <div>
-      <SearchPage />
+    <Router>
+      <div>
+        <Switch>
+          <Route exact path={["/", "/books"]}>
+            <SearchPage />
+          </Route>
 
-    </div>
+          <Route>
+            <NoMatch />
+          </Route>
+
+        </Switch>
+
+      </div>
+
+    </Router>
   );
 }
 

@@ -30,6 +30,33 @@ export default function SearchPage() {
       .catch(err => console.log(err))
   }
 
+  const handleSave = key => {
+    console.log("save clicked")
+
+    const bookToSave = books.filter(book => book.etag === key.target.value);
+
+
+    const theBook = {
+      title: bookToSave[0].volumeInfo.title,
+      authors: bookToSave[0].volumeInfo.authors,
+      image: bookToSave[0].volumeInfo.imageLinks.thumbnail,
+      description: bookToSave[0].searchInfo.textSnippet,
+      link: bookToSave[0].volumeInfo.infoLink
+
+    }
+
+    console.log(theBook)
+
+
+    API.saveBook(theBook)
+      .then(res => {
+        console.log(res)
+      })
+      .catch(err => console.log(err))
+
+
+  }
+
   return (
     <div>
       <Nav />
@@ -52,7 +79,7 @@ export default function SearchPage() {
                   </Col>
                   <Col size="xs-3 sm-2">
                     <Button
-                      onClick={handleFormSubmit}
+                      click={handleFormSubmit}
                       type="success"
                       className="input-lg"
                     >
@@ -70,11 +97,13 @@ export default function SearchPage() {
               {books.map(book => (
                 <BookListItem
                   key={book.etag}
+                  id={book.etag}
                   title={book.volumeInfo.title}
                   authors={book.volumeInfo.authors}
                   image={book.volumeInfo.imageLinks.thumbnail}
                   description={book.searchInfo.textSnippet}
                   link={book.volumeInfo.infoLink}
+                  click={() => handleSave}
                 />
               ))}
             </BookList>
