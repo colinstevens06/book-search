@@ -93,8 +93,12 @@ export default function SearchPage() {
         </Row>
         <Row>
           <Col size="xs-12">
+            {/* {!bookSearch.length && bookSearch.length === undefined ? (
+              <h1 className="text-center">No Books For This Search</h1>
+            ) : ( */}
             <BookList>
               {books.map(book => (
+
                 <BookListItem
                   key={book.etag}
                   id={book.etag}
@@ -107,6 +111,8 @@ export default function SearchPage() {
                 />
               ))}
             </BookList>
+            {/* )
+            } */}
           </Col>
         </Row>
 

@@ -15,7 +15,7 @@ export function BookListItem(props) {
       <Container>
         <Row>
           <Col size="xs-2 sm-2">
-            <Thumbnail src={props.image} />
+            <Thumbnail src={props.image || "https://placehold.it/200x300"} />
           </Col>
 
 
@@ -23,7 +23,7 @@ export function BookListItem(props) {
             <h3>{props.title}</h3>
             <p><strong>By: </strong>{props.authors}</p>
             <p>
-              {props.description}
+              {props.description || "There is no description of this book."}
             </p>
             <a
               rel="noreferrer noopener"
