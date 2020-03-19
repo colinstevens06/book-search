@@ -4,14 +4,12 @@ import React, { useState, useEffect } from "react";
 import Nav from '../components/Nav'
 import Jumbotron from "../components/Jumbotron"
 import { Col, Row, Container } from "../components/Grid";
-import Input from "../components/Input"
 import { BookList, BookListItem } from "../components/SavedList"
 import API from "../utils/API";
 
 export default function SavedPage() {
 
   const [books, setBooks] = useState([])
-  // const [bookSearch, setBookSearch] = useState("")
 
   useEffect(() => {
     getBooksDB()
@@ -23,6 +21,13 @@ export default function SavedPage() {
       .then(res => {
         setBooks(res.data)
       })
+      .catch(err => console.log(err))
+  }
+
+  const deleteBook = (id) => {
+    console.log("delete book")
+    API.deleteBook(id)
+      .then(res => getBooksDB())
       .catch(err => console.log(err))
   }
 
@@ -40,14 +45,15 @@ export default function SavedPage() {
           <Col size="xs-12">
             <BookList>
               {books.map(book => (
-                <BookListItem
-                  key={book.id}
-                  id={book.id}
+                < BookListItem
+                  key={book._id}
+                  id={book._id}
                   title={book.title}
                   authors={book.authors}
                   image={book.image}
                   description={book.description}
                   link={book.link}
+                  click={() => deleteBook(book._id)}
                 />
               ))}
             </BookList>

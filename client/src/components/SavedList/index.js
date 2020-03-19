@@ -37,7 +37,13 @@ export function BookListItem(props) {
           </Col>
 
           <Col size="xs-2 sm-1">
+            <Button
+              className={"btn btn-primary"}
+              click={props.click}
+              value={props.id}
 
+            >              Delete
+            </Button>
           </Col>
         </Row>
       </Container>
