@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 // PAGES
 import SearchPage from "./pages/Search"
 import NoMatch from "./pages/NoMatch"
+import SavedPage from "./pages/Saved"
 
 function App() {
   return (
@@ -12,6 +13,9 @@ function App() {
         <Switch>
           <Route exact path={["/", "/books"]}>
             <SearchPage />
+          </Route>
+          <Route exact path="/saved">
+            <SavedPage />
           </Route>
 
           <Route>
