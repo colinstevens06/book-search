@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const query = "https://www.googleapis.com/books/v1/volumes?q="
-const apiKey = "&key=AIzaSyB6W5a-arzSIPn2XNM6zsB0Xyvja7IkIQk"
+const apiKey = process.env.API_KEY
 
 export default {
   // Gets all books
