@@ -93,26 +93,39 @@ export default function SearchPage() {
         </Row>
         <Row>
           <Col size="xs-12">
-            {/* {!bookSearch.length && bookSearch.length === undefined ? (
-              <h1 className="text-center">No Books For This Search</h1>
-            ) : ( */}
-            <BookList>
-              {books.map(book => (
 
-                <BookListItem
-                  key={book.etag}
-                  id={book.etag}
-                  title={book.volumeInfo.title}
-                  authors={book.volumeInfo.authors}
-                  image={book.volumeInfo.imageLinks.thumbnail}
-                  description={book.searchInfo.textSnippet}
-                  link={book.volumeInfo.infoLink}
-                  click={() => handleSave}
-                />
-              ))}
-            </BookList>
-            {/* )
-            } */}
+            {!books ? (
+              <h1 className="mt-4">No Results</h1>
+            ) :
+              !bookSearch
+                ? (
+                  <h1 className="mt-4">Perform a search to see results</h1>
+                ) : (
+                  <BookList>
+                    {books.map(book => (
+                      <BookListItem
+                        key={book.etag}
+                        id={book.etag}
+                        title={book.volumeInfo.title}
+                        authors={book.volumeInfo.authors}
+                        image={!book.volumeInfo?.imageLinks?.thumbnail ? (
+                          "https://placehold.it/200x300"
+                        ) : (
+                            book.volumeInfo.imageLinks.thumbnail
+                          )}
+                        description={!book.searchInfo?.textSnippet ? (
+                          "No description of this book"
+                        ) : (
+                            book.searchInfo.textSnippet
+                          )}
+
+                        link={book.volumeInfo.infoLink}
+                        click={() => handleSave}
+                      />
+                    ))}
+                  </BookList>
+                )
+            }
           </Col>
         </Row>
 
